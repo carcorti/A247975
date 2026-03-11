@@ -6,7 +6,7 @@ a Computational Study of Sun's Conjecture 4.1(i)*
 Carlo Corti — in preparation for submission to *Mathematics of Computation* (AMS), 2026.
 
 > **arXiv:** [to be added upon deposit]  
-> **Zenodo DOI:** https://doi.org/10.5281/zenodo.18920372  
+> **Zenodo DOI:** https://doi.org/10.5281/zenodo.18920371  
 > **OEIS sequence:** [A247975](https://oeis.org/A247975)
 
 ---
@@ -165,7 +165,7 @@ Carlo Corti,
  a Computational Study of Sun's Conjecture 4.1(i)",
 in preparation for submission to Mathematics of Computation (AMS), 2026.
 arXiv: [to be added upon deposit]
-Zenodo DOI: https://doi.org/10.5281/zenodo.18920372
+Zenodo DOI: https://doi.org/10.5281/zenodo.18920371
 ```
 
 ---
