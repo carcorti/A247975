@@ -1,0 +1,125 @@
+sun41_v12 -- targeted segmented-sieve search (A247975)
+  Unresolved cases : 49 (from Phase 6, n-bound 2e9)
+  Search range     : n-index 2000000001 .. 3000000000
+  Segment size     : 20000000 odd slots (2.50 MB/thread)
+  OpenMP threads   : 16
+
+Building small prime sieve up to 1400000 ...
+  Small prime table: 107126 primes up to 1400000 (0.94 MB)
+  p_99105 = 1286953 (largest p_m)
+
+  Estimated p_{BOUND} ~ 7.1857e+10
+
+Pre-computing p_{START_N} (n = 2000000001) ...
+  p_{2000000001} = 47055833479
+
+Starting parallel search (49 cases, ~3430 segments total) ...
+
+[progress]  14.6%  elapsed    0 min  ETA    2 min  (seg 500 / 3430)
+[progress]  29.2%  elapsed    1 min  ETA    2 min  (seg 1000 / 3430)
+[progress]  43.7%  elapsed    1 min  ETA    1 min  (seg 1500 / 3430)
+[progress]  58.3%  elapsed    1 min  ETA    1 min  (seg 2000 / 3430)
+[progress]  72.9%  elapsed    2 min  ETA    1 min  (seg 2500 / 3430)
+[progress]  87.5%  elapsed    2 min  ETA    0 min  (seg 3000 / 3430)
+[progress] 100.0%  elapsed    3 min  ETA    0 min  (seg 3500 / 3430)
+[progress] 100.0%  elapsed    3 min  ETA    0 min  (seg 4000 / 3430)
+  FOUND  m=36726    p_m=437083      n=2412333964  [1/49]
+[progress] 100.0%  elapsed    3 min  ETA    0 min  (seg 4500 / 3430)
+[progress] 100.0%  elapsed    4 min  ETA    0 min  (seg 5000 / 3430)
+[progress] 100.0%  elapsed    4 min  ETA    0 min  (seg 5500 / 3430)
+[progress] 100.0%  elapsed    4 min  ETA    0 min  (seg 6000 / 3430)
+[progress] 100.0%  elapsed    5 min  ETA    0 min  (seg 6500 / 3430)
+[progress] 100.0%  elapsed    5 min  ETA    0 min  (seg 7000 / 3430)
+[progress] 100.0%  elapsed    6 min  ETA    0 min  (seg 7500 / 3430)
+[progress] 100.0%  elapsed    6 min  ETA    0 min  (seg 8000 / 3430)
+  FOUND  m=20686    p_m=233173      n=2858183263  [2/49]
+[progress] 100.0%  elapsed    6 min  ETA    0 min  (seg 8500 / 3430)
+  FOUND  m=18241    p_m=203227      n=2873665609  [3/49]
+[progress] 100.0%  elapsed    7 min  ETA    0 min  (seg 9000 / 3430)
+[progress] 100.0%  elapsed    7 min  ETA    0 min  (seg 9500 / 3430)
+  open   m=37949    p_m=453181      n > 3000000000  [4/49]
+  open   m=49889    p_m=610469      n > 3000000000  [5/49]
+  open   m=22186    p_m=251809      n > 3000000000  [6/49]
+  open   m=37249    p_m=443837      n > 3000000000  [7/49]
+  open   m=37253    p_m=443873      n > 3000000000  [8/49]
+  open   m=43297    p_m=523007      n > 3000000000  [9/49]
+  open   m=22802    p_m=259577      n > 3000000000  [10/49]
+  open   m=19234    p_m=215317      n > 3000000000  [11/49]
+  open   m=11924    p_m=127289      n > 3000000000  [12/49]
+[progress] 100.0%  elapsed    7 min  ETA    0 min  (seg 10000 / 3430)
+  open   m=48834    p_m=596419      n > 3000000000  [13/49]
+  open   m=33566    p_m=396239      n > 3000000000  [14/49]
+  open   m=23995    p_m=274453      n > 3000000000  [15/49]
+  open   m=36303    p_m=431833      n > 3000000000  [16/49]
+[progress] 100.0%  elapsed    8 min  ETA    0 min  (seg 10500 / 3430)
+[progress] 100.0%  elapsed    8 min  ETA    0 min  (seg 11000 / 3430)
+[progress] 100.0%  elapsed    9 min  ETA    0 min  (seg 11500 / 3430)
+[progress] 100.0%  elapsed    9 min  ETA    0 min  (seg 12000 / 3430)
+[progress] 100.0%  elapsed    9 min  ETA    0 min  (seg 12500 / 3430)
+  FOUND  m=71049    p_m=896723      n=2298999145  [17/49]
+[progress] 100.0%  elapsed   10 min  ETA    0 min  (seg 13000 / 3430)
+[progress] 100.0%  elapsed   10 min  ETA    0 min  (seg 13500 / 3430)
+[progress] 100.0%  elapsed   10 min  ETA    0 min  (seg 14000 / 3430)
+  FOUND  m=68744    p_m=865327      n=2423390090  [18/49]
+  open   m=51816    p_m=636277      n > 3000000000  [19/49]
+[progress] 100.0%  elapsed   11 min  ETA    0 min  (seg 14500 / 3430)
+[progress] 100.0%  elapsed   11 min  ETA    0 min  (seg 15000 / 3430)
+[progress] 100.0%  elapsed   12 min  ETA    0 min  (seg 15500 / 3430)
+[progress] 100.0%  elapsed   12 min  ETA    0 min  (seg 16000 / 3430)
+[progress] 100.0%  elapsed   12 min  ETA    0 min  (seg 16500 / 3430)
+[progress] 100.0%  elapsed   13 min  ETA    0 min  (seg 17000 / 3430)
+  FOUND  m=84521    p_m=1083371     n=2282409344  [20/49]
+  FOUND  m=67273    p_m=845197      n=2766403488  [21/49]
+[progress] 100.0%  elapsed   13 min  ETA    0 min  (seg 17500 / 3430)
+  open   m=53963    p_m=665179      n > 3000000000  [22/49]
+[progress] 100.0%  elapsed   13 min  ETA    0 min  (seg 18000 / 3430)
+  open   m=55468    p_m=685453      n > 3000000000  [23/49]
+[progress] 100.0%  elapsed   14 min  ETA    0 min  (seg 18500 / 3430)
+[progress] 100.0%  elapsed   14 min  ETA    0 min  (seg 19000 / 3430)
+  open   m=55874    p_m=690953      n > 3000000000  [24/49]
+  open   m=61007    p_m=760367      n > 3000000000  [25/49]
+[progress] 100.0%  elapsed   15 min  ETA    0 min  (seg 19500 / 3430)
+  open   m=66257    p_m=831301      n > 3000000000  [26/49]
+  open   m=67203    p_m=844253      n > 3000000000  [27/49]
+  open   m=69546    p_m=876191      n > 3000000000  [28/49]
+[progress] 100.0%  elapsed   15 min  ETA    0 min  (seg 20000 / 3430)
+  open   m=72568    p_m=917759      n > 3000000000  [29/49]
+  open   m=67447    p_m=847621      n > 3000000000  [30/49]
+  open   m=76761    p_m=975497      n > 3000000000  [31/49]
+  FOUND  m=92335    p_m=1191563     n=2223036115  [32/49]
+  open   m=76868    p_m=977087      n > 3000000000  [33/49]
+  open   m=81986    p_m=1047971     n > 3000000000  [34/49]
+[progress] 100.0%  elapsed   15 min  ETA    0 min  (seg 20500 / 3430)
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 21000 / 3430)
+  FOUND  m=93790    p_m=1212347     n=2179204108  [35/49]
+  FOUND  m=94768    p_m=1225981     n=2184705450  [36/49]
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 21500 / 3430)
+  open   m=82096    p_m=1049519     n > 3000000000  [37/49]
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 22000 / 3430)
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 22500 / 3430)
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 23000 / 3430)
+[progress] 100.0%  elapsed   16 min  ETA    0 min  (seg 23500 / 3430)
+  open   m=82300    p_m=1052459     n > 3000000000  [38/49]
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 24000 / 3430)
+  open   m=86557    p_m=1111393     n > 3000000000  [39/49]
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 24500 / 3430)
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 25000 / 3430)
+  FOUND  m=93890    p_m=1213651     n=2640300431  [40/49]
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 25500 / 3430)
+  open   m=90161    p_m=1161757     n > 3000000000  [41/49]
+  open   m=98008    p_m=1271383     n > 3000000000  [42/49]
+  open   m=98258    p_m=1275011     n > 3000000000  [43/49]
+  open   m=98379    p_m=1276747     n > 3000000000  [44/49]
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 26000 / 3430)
+  open   m=90005    p_m=1159597     n > 3000000000  [45/49]
+  open   m=94429    p_m=1221131     n > 3000000000  [46/49]
+[progress] 100.0%  elapsed   17 min  ETA    0 min  (seg 26500 / 3430)
+  open   m=99105    p_m=1286953     n > 3000000000  [47/49]
+  open   m=97251    p_m=1260901     n > 3000000000  [48/49]
+  open   m=97351    p_m=1262453     n > 3000000000  [49/49]
+
+=== SUMMARY ===
+Search range   : n = 2000000001 .. 3000000000
+Newly resolved : 11 / 49
+Still open     : 38
+Elapsed        : 1071 s

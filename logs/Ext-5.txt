@@ -1,0 +1,77 @@
+sun41_v12e -- targeted segmented-sieve search (A247975)
+  Unresolved cases : 25 (after fase 4, n-bound 6e9)
+  Search range     : n-index 6000000001 .. 7000000000
+  Segment size     : 20000000 odd slots (2.50 MB/thread)
+  OpenMP threads   : 16
+
+Building small prime sieve up to 1400000 ...
+  Small prime table: 107126 primes up to 1400000 (0.94 MB)
+  p_98379 = 1276747 (largest p_m)
+
+  Estimated p_{BOUND} ~ 1.7386e+11
+
+Pre-computing p_{START_N} (n = 6000000001) ...
+  p_{6000000001} = 148059109223
+
+Starting parallel search (25 cases, ~32400 segments total) ...
+
+[progress]   1.5%  elapsed    0 min  ETA   24 min  (seg 500 / 32400)
+[progress]   3.1%  elapsed    1 min  ETA   24 min  (seg 1000 / 32400)
+  FOUND  m=11924    p_m=127289      n=6119832581  [1/25]
+[progress]   4.6%  elapsed    1 min  ETA   23 min  (seg 1500 / 32400)
+[progress]   6.2%  elapsed    2 min  ETA   23 min  (seg 2000 / 32400)
+[progress]   7.7%  elapsed    2 min  ETA   23 min  (seg 2500 / 32400)
+[progress]   9.3%  elapsed    2 min  ETA   22 min  (seg 3000 / 32400)
+[progress]  10.8%  elapsed    3 min  ETA   22 min  (seg 3500 / 32400)
+[progress]  12.3%  elapsed    3 min  ETA   21 min  (seg 4000 / 32400)
+  FOUND  m=22186    p_m=251809      n=6418823416  [2/25]
+[progress]  13.9%  elapsed    3 min  ETA   21 min  (seg 4500 / 32400)
+[progress]  15.4%  elapsed    4 min  ETA   20 min  (seg 5000 / 32400)
+[progress]  17.0%  elapsed    4 min  ETA   20 min  (seg 5500 / 32400)
+[progress]  18.5%  elapsed    4 min  ETA   20 min  (seg 6000 / 32400)
+[progress]  20.1%  elapsed    5 min  ETA   19 min  (seg 6500 / 32400)
+[progress]  21.6%  elapsed    5 min  ETA   19 min  (seg 7000 / 32400)
+[progress]  23.1%  elapsed    6 min  ETA   19 min  (seg 7500 / 32400)
+[progress]  24.7%  elapsed    6 min  ETA   18 min  (seg 8000 / 32400)
+[progress]  26.2%  elapsed    6 min  ETA   18 min  (seg 8500 / 32400)
+[progress]  27.8%  elapsed    7 min  ETA   17 min  (seg 9000 / 32400)
+[progress]  29.3%  elapsed    7 min  ETA   17 min  (seg 9500 / 32400)
+  open   m=55874    p_m=690953      n > 7000000000  [3/25]
+  open   m=37949    p_m=453181      n > 7000000000  [4/25]
+[progress]  30.9%  elapsed    7 min  ETA   17 min  (seg 10000 / 32400)
+  open   m=51816    p_m=636277      n > 7000000000  [5/25]
+  open   m=53963    p_m=665179      n > 7000000000  [6/25]
+  open   m=37253    p_m=443873      n > 7000000000  [7/25]
+  open   m=48834    p_m=596419      n > 7000000000  [8/25]
+  open   m=43297    p_m=523007      n > 7000000000  [9/25]
+  open   m=55468    p_m=685453      n > 7000000000  [10/25]
+  open   m=23995    p_m=274453      n > 7000000000  [11/25]
+  open   m=66257    p_m=831301      n > 7000000000  [12/25]
+  open   m=67447    p_m=847621      n > 7000000000  [13/25]
+[progress]  32.4%  elapsed    8 min  ETA   16 min  (seg 10500 / 32400)
+  open   m=37249    p_m=443837      n > 7000000000  [14/25]
+  open   m=67203    p_m=844253      n > 7000000000  [15/25]
+  open   m=22802    p_m=259577      n > 7000000000  [16/25]
+[progress]  34.0%  elapsed    8 min  ETA   15 min  (seg 11000 / 32400)
+  open   m=69546    p_m=876191      n > 7000000000  [17/25]
+[progress]  35.5%  elapsed    8 min  ETA   14 min  (seg 11500 / 32400)
+  FOUND  m=76761    p_m=975497      n=6814926932  [18/25]
+[progress]  37.0%  elapsed    8 min  ETA   14 min  (seg 12000 / 32400)
+[progress]  38.6%  elapsed    8 min  ETA   13 min  (seg 12500 / 32400)
+[progress]  40.1%  elapsed    8 min  ETA   12 min  (seg 13000 / 32400)
+  FOUND  m=86557    p_m=1111393     n=6670175973  [19/25]
+[progress]  41.7%  elapsed    8 min  ETA   12 min  (seg 13500 / 32400)
+[progress]  43.2%  elapsed    8 min  ETA   11 min  (seg 14000 / 32400)
+[progress]  44.8%  elapsed    8 min  ETA   10 min  (seg 14500 / 32400)
+  open   m=82300    p_m=1052459     n > 7000000000  [20/25]
+  open   m=97251    p_m=1260901     n > 7000000000  [21/25]
+  open   m=76868    p_m=977087      n > 7000000000  [22/25]
+  open   m=98379    p_m=1276747     n > 7000000000  [23/25]
+  open   m=98258    p_m=1275011     n > 7000000000  [24/25]
+  open   m=82096    p_m=1049519     n > 7000000000  [25/25]
+
+=== SUMMARY ===
+Search range   : n = 6000000001 .. 7000000000
+Newly resolved : 4 / 25
+Still open     : 21
+Elapsed        : 659 s
