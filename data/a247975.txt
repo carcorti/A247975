@@ -14,7 +14,7 @@
 #   - Extended search (36 cases resolved, bound extended to n<=1.6*10^10): C segmented sieve (sun41_v12*.c).
 #   - Divisibility (SymPy): for all exceptional cases (a(n)>10^8), the condition
 #     (prime(n)^2+prime(a(n))^2) mod (n+a(n))=0 verified independently via sympy.prime().
-#   - Code and data: https://github.com/carcorti/A247975 | DOI: 10.5281/zenodo.18920372
+#   - Code and data: https://github.com/carcorti/A247975 | DOI: 10.5281/zenodo.18920371
 1 1
 2 8
 3 15479

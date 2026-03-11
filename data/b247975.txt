@@ -3,7 +3,7 @@
 # Computed by Carlo Corti, Mar 2026.
 # Search bound: a(n) <= 1.6*10^10 for n in 1..100000.
 # Full dataset (99987 resolved values, n=1..100000 with 13 gaps) available in a247975.txt.
-# Code and data: https://github.com/carcorti/A247975 | DOI: 10.5281/zenodo.18920372
+# Code and data: https://github.com/carcorti/A247975 | DOI: 10.5281/zenodo.18920371
 1 1
 2 8
 3 15479
