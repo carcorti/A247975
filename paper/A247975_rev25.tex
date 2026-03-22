@@ -71,36 +71,40 @@ theory, Sun's conjecture, Hill estimator, Cram\'er ratio}
 \begin{abstract}
 We present a computational investigation of sequence A247975 in the
 OEIS, which encodes Sun's Conjecture~4.1(i): for every positive integer
-$m$, there exists a positive integer $n$ such that $m+n$ divides
+$m$, there exists a positive integer~$n$ such that $(m+n)$ divides
 $p_m^2 + p_n^2$, where $p_k$ denotes the $k$-th prime.
-We determine $a(m)$ for $119\,995$ of the values $m = 1, 2, \ldots,
-120\,000$, with final search bound $n \leq 2 \times 10^{11}$;
+We determine $a(m)$ for $119\,995$ of the values
+$m = 1, 2, \ldots, 120\,000$, with final search bound
+$n \leq 2 \times 10^{11}$;
 the remaining $5$ values are unresolved within this bound.
 The initial computation (search bound $n \leq 2 \times 10^9$)
 resolved $119\,931$ cases with $69$ unresolved; a targeted
-extended search resolved $64$ of those $69$ cases,
+extended search resolved $64$ of those $69$,
 reducing the unresolved count to~$5$.
-Among the $119\,995$ resolved values we identify $606$ exceptional
-resolved cases (where $a(m) > 10^8$), and document the outstanding
-Cram\'er-type ratio $a(m)/(m \log m)$
+Among the $119\,995$ resolved values we identify $606$
+exceptional resolved cases (where $a(m) > 10^8$), and document the
+outstanding Cram\'er-type ratio $a(m)/(m \log m)$
 (all logarithms are natural) at $m = 23\,995$ with
-$a(m) = 47\,572\,503\,750$ (ratio $\approx 196\,577$, the global
-maximum among resolved cases), and the largest absolute value
+$a(m) = 47\,572\,503\,750$
+(ratio $\approx 196\,577$, the global maximum among resolved cases),
+and the largest absolute value
 $a(82\,300) = 81\,961\,045\,941$.
-Statistical analysis of the resolved dataset yields a Hill statistic
+Statistical analysis of the resolved dataset yields a Hill
+statistic
 $\hat{\alpha}_{\mathrm{Hill}} \approx 0.713$, consistent with
 heavy-tailed behaviour.
-The $5$ unresolved values
-($m = 37\,249$, $66\,257$, $76\,868$, $98\,379$, $117\,862$)
-each have estimated Cram\'er ratios
-exceeding $145\,000$ and are proposed as explicit open problems.
+The $5$ unresolved values ($m \in \{37\,249,\; 66\,257,\;
+76\,868,\; 98\,379,\; 117\,862\}$)
+each have estimated Cram\'er ratios exceeding $145\,000$ and are
+proposed as explicit open problems.
 Divisibility was independently verified for all $606$ exceptional
 cases via \texttt{SymPy} ($542$ from the initial computation and
 all $64$ from the extended search); minimality was independently
-verified for $319$ cases via an independent C sieve of Eratosthenes:
+verified for $319$ cases via an independent C~sieve of Eratosthenes:
 $290$ cases from the initial computation and $29$ selected
-extended-search cases (including the $4$ with the largest Cram\'er
-ratios and all $9$ cases with $a(m) \in [10^{10}, 3 \times 10^{10}]$).
+extended-search cases (including the $4$ with the largest
+Cram\'er ratios and all $9$ cases with
+$a(m) \in [10^{10},\, 3 \times 10^{10}]$).
 \end{abstract}
 
 \maketitle
@@ -148,9 +152,9 @@ these are proposed as explicit open problems.
 
 \section{Setup and Notation}
 
-We begin by reformulating the divisibility condition in modular
-arithmetic and establishing the number-theoretic constraints that
-underlie the computational search.
+We reformulate the divisibility condition in modular arithmetic
+and establish the number-theoretic constraints underlying the
+computational search.
 
 For positive integers $m$ and $n$, set $s = m + n$.
 The divisibility condition $(m+n) \mid p_m^2 + p_n^2$ is equivalent to
@@ -421,7 +425,7 @@ unresolved values likely require $n$ well beyond $2 \times 10^{11}$.
 		``+Resolved'' denotes newly resolved cases in
 		each session.}
 	\label{tab:extended}
-	\small
+	\footnotesize
 	\begin{tabular}{llrrrl}
 		\toprule
 		Session & Bound $n$ & +Resolved & Still open & Time (min) & Code \\
@@ -481,9 +485,10 @@ exhaustive C~search.
 	condition \emph{and} the minimality of $a(m)$.
 	The $319$ cases were selected in five groups:
 	\begin{itemize}
-		\item \emph{Group~B1}: the $100$ smallest exceptional cases
-		($a(m) \in [1.00 \times 10^8,\; 1.52 \times 10^8]$), providing
-		the first independent minimality check for exceptional values.
+		\item \emph{Group~B1}: the $100$ smallest exceptional cases,
+		with $a(m)$ ranging from $1.00 \times 10^8$ to
+		$1.52 \times 10^8$, providing the first independent
+		minimality check for exceptional values.
 		\item \emph{Group~B2}: $150$ randomly selected non-exceptional
 		cases ($a(m) < 10^8$, seed~$= 42$).
 		\item \emph{Group~C}: all $40$ resolved cases with
@@ -576,18 +581,20 @@ Section~\ref{sec:data}.
 
 \subsection{Outstanding cases}
 
-The five largest Cram\'er-type ratios $a(m)/(m\log m)$ among resolved
-$m \leq 120\,000$ are listed in Table~\ref{tab:ratio}.
+We list the five largest Cram\'er-type ratios
+$C(m) = a(m)/(m\log m)$ among resolved $m \leq 120\,000$
+in Table~\ref{tab:ratio}.
 Since $p_m \sim m\log m$ by the prime number theorem
-(see \cite{Davenport}, Ch.~18), the ratio
-$C(m) = a(m)/(m\log m)$ is approximately $a(m)/p_m$, normalising the
-solution index by the size of the prime $p_m$.
-Under Cram\'er's probabilistic model for primes~\cite{Cramer1936},
-treating primes as independent random events with local density
-$1/\log n$ near $n$, the expected index at which one encounters a prime
-satisfying a given congruence condition of modulus of order $m$ is of
-order $m$; hence $C(m)$ measures how many times larger the actual
-solution is compared to this heuristic baseline.
+(see \cite{Davenport}, Ch.~18), the ratio~$C(m)$
+is approximately $a(m)/p_m$,
+normalising the solution index by the size of the prime~$p_m$.
+Under Cram\'er's probabilistic model for
+primes~\cite{Cramer1936}, treating primes as independent random
+events with local density $1/\log n$ near~$n$, the expected index
+at which one encounters a prime satisfying a given congruence
+condition of modulus of order~$m$ is of order~$m$; hence $C(m)$
+measures how many times larger the actual solution is compared to
+this heuristic baseline.
 The extended search dramatically reshuffled the ranking:
 $m = 23\,995$ now holds the global resolved maximum
 ($C \approx 196\,577$), far exceeding the previous record holder
@@ -659,16 +666,16 @@ successive ranges of $10\,000$.
 
 \section{Statistical Analysis}
 
-\subsection{Heavy-tailed distribution}
+\subsection{Heavy tail}
 
-The distribution of $a(m)$ for resolved $m = 1, \ldots,\allowbreak 120\,000$ is
+The distribution of $a(m)$ for resolved $m = 1, \ldots, 120\,000$ is
 strongly heavy-tailed.
 We apply the Hill estimator~\cite{Hill1975} as an exploratory
-diagnostic tool; since the data are deterministic and not i.i.d.,
-this should be understood as descriptive rather than as a formal
-inference about an underlying distribution (see \cite{Clauset2009}
-for a discussion of the limitations of power-law fitting in empirical
-data).
+diagnostic tool; since the data are deterministic and not
+i.i.d., this should be understood as descriptive rather than as
+a formal inference about an underlying distribution
+(see \cite{Clauset2009} for a discussion of the limitations of
+power-law fitting in empirical data).
 Given $N_s$ order statistics $X_{(1)} \leq \cdots \leq X_{(N_s)}$, the
 Hill estimator with threshold parameter $k$ is defined as
 \[
@@ -1062,16 +1069,11 @@ cross-check for our results.
 	(with $K \approx 0.7642$) of integers up to $x$ with no prime factor
 	$q \equiv 3 \pmod{4}$ to odd power; the natural density of this
 	set is zero.
-	The value ${\sim}83\%$ cited in Section~3.1 is a numerical consequence
-	of this formula evaluated at the finite scale $x \approx 10^9$,
-	not a direct theorem prediction.
 
 	\bibitem{Granville1995}
 	A.~Granville,
 	\textit{Harald Cram\'er and the distribution of prime numbers},
 	Scand.\ Actuarial J.\ (1995), no.~1, 12--28.
-	Provides a refined probabilistic model correcting the classical
-	Cram\'er heuristic.
 
 \end{thebibliography}
 

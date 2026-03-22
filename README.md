@@ -6,7 +6,7 @@ a Computational Study of Sun's Conjecture 4.1(i)*
 Carlo Corti — manuscript in preparation for submission to *Mathematics of Computation* (AMS), 2026.
 
 > **arXiv:** [to be added upon deposit]  
-> **Zenodo DOI:** [10.5281/zenodo.18920372](https://doi.org/10.5281/zenodo.18920372)  
+> **Zenodo DOI:** [10.5281/zenodo.18920371](https://doi.org/10.5281/zenodo.18920371)  
 > **OEIS sequence:** [A247975](https://oeis.org/A247975)
 
 ---
@@ -233,7 +233,7 @@ Carlo Corti,
 "Exceptional Cases and Statistical Structure of Sequence A247975:
  a Computational Study of Sun's Conjecture 4.1(i)",
 manuscript in preparation for submission to Mathematics of Computation (AMS), 2026.
-Zenodo DOI: 10.5281/zenodo.18920372
+Zenodo DOI: 10.5281/zenodo.18920371
 ```
 
 ---
