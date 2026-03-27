@@ -3,7 +3,7 @@
 **Repository for the paper:**  
 *Exceptional Cases and Statistical Structure of Sequence A247975:  
 a Computational Study of Sun's Conjecture 4.1(i)*  
-Carlo Corti — manuscript in preparation for submission to *Mathematics of Computation* (AMS), 2026.
+Carlo Corti — manuscript in preparation, 2026.
 
 > **arXiv:** [to be added upon deposit]  
 > **Zenodo DOI:** [10.5281/zenodo.18920371](https://doi.org/10.5281/zenodo.18920371)  
@@ -67,7 +67,7 @@ The sequence A247975 is defined as *a*(*m*) = the least such *n*.
 
 | File | Description |
 |---|---|
-| `A247975_rev25.tex` | **Current manuscript** (Rev 25, March 2026). LaTeX source, `amsart` class. Prepared for submission to *Mathematics of Computation*. |
+| `A247975_rev25.tex` | **Current manuscript** (Rev 25, March 2026). LaTeX source, `amsart` class. |
 | `A247975_rev15.tex` | v1 manuscript (Rev 15). Retained for reference. |
 
 ---
@@ -232,7 +232,7 @@ If you use this code or data, please cite:
 Carlo Corti,
 "Exceptional Cases and Statistical Structure of Sequence A247975:
  a Computational Study of Sun's Conjecture 4.1(i)",
-manuscript in preparation for submission to Mathematics of Computation (AMS), 2026.
+manuscript in preparation, 2026.
 Zenodo DOI: 10.5281/zenodo.18920371
 ```
 
