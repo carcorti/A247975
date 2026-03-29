@@ -5,7 +5,6 @@
 a Computational Study of Sun's Conjecture 4.1(i)*  
 Carlo Corti — manuscript in preparation, 2026.
 
-> **arXiv:** [to be added upon deposit]  
 > **Zenodo DOI:** [10.5281/zenodo.18920371](https://doi.org/10.5281/zenodo.18920371)  
 > **OEIS sequence:** [A247975](https://oeis.org/A247975)
 
@@ -31,7 +30,7 @@ The sequence A247975 is defined as *a*(*m*) = the least such *n*.
 |---|---|
 | `sun_v6.c` | **Phase 1 search program.** Computes *a*(*m*) for *m* ≤ 120 000, search bound *n* ≤ 2 × 10⁹. Uses a global sieve of Eratosthenes with a modular filter. **This is the primary program that produced the Phase 1 dataset.** Requires ~21 GB RAM. |
 | `sun_ext_v11.c` | **Extended search program.** Segmented sieve with no persistent prime table; peak RAM < 100 MB regardless of bound. Reads a list of unresolved *m*-values from file and searches up to a specified *n*-bound. Used in four sessions (S1–S4) to extend the bound from 2 × 10⁹ to 2 × 10¹¹, resolving 64 additional cases. |
-| `verify_min_ext.c` | **Independent minimality verifier (Extended).** Segmented sieve with no shared code with the search programs. Uses `__uint128_t` arithmetic to handle *p*\_n² overflow at large *n*. Verified 29 Extended-search cases by exhaustive search from *n* = 1. |
+| `verify_min_ext.c` | **Independent minimality verifier (Extended).** Segmented sieve with no shared code with the search programs. Uses `__uint128_t` arithmetic to handle *p*\_n² overflow at large *n*. Verified 29 Extended-search cases (Groups E1–E3) by exhaustive search from *n* = 1. |
 | `sun41_v6b.c` | Earlier Phase 6 program (v1, *m* ≤ 100 000). Retained for reproducibility of v1 results. |
 | `sun41_v6.c` | Earlier Phase 5 program (v1). Retained for completeness. |
 | `verify_min.c` | Independent minimality verifier for Phase 1 cases (v1). Verified 290 cases (Groups B1, B2, C). |
@@ -67,8 +66,8 @@ The sequence A247975 is defined as *a*(*m*) = the least such *n*.
 
 | File | Description |
 |---|---|
-| `A247975_rev25.tex` | **Current manuscript** (Rev 25, March 2026). LaTeX source, `amsart` class. |
-| `A247975_rev15.tex` | v1 manuscript (Rev 15). Retained for reference. |
+| `A247975_final.tex` | **Current manuscript** (final version, March 2026). LaTeX source, `sn-jnl` class (`sn-mathphys-num`). |
+| `A247975.pdf` | Compiled PDF of the manuscript. |
 
 ---
 
@@ -79,7 +78,7 @@ The sequence A247975 is defined as *a*(*m*) = the least such *n*.
 - **Extended search** (bound *n* ≤ 2 × 10¹¹, four sessions): 64 of the 69 resolved.
 - **5 definitive open cases** (*m* ∈ {37 249, 66 257, 76 868, 98 379, 117 862}), all with estimated Cramér ratio lower bound > 145 000; proposed as explicit open problems.
 - **606** exceptional resolved cases (*a*(*m*) > 10⁸); all independently verified for divisibility via SymPy.
-- **319** cases independently verified for minimality (290 Phase 1 + 29 Extended) via `verify_min.c` / `verify_min_ext.c`.
+- **319** cases independently verified for minimality (290 Phase 1 + 29 Extended) via `verify_min.c` / `verify_min_ext.c`; the 29 Extended cases comprise Groups E1 (4 cases), E2 (15 cases), and E3 (9 cases), plus one smoke-test reference (*m* = 11 924).
 - **10 925** individual verifications total, zero discrepancies.
 
 ### Top 5 by Cramér-type ratio *C*(*m*) = *a*(*m*) / (*m* log *m*)
@@ -197,14 +196,6 @@ Output is fully deterministic (no probabilistic primality tests).
 ```
 
 S1: ~49 min, 62 resolved. S2: ~69 min, 2 resolved. S3: ~103 min, 0. S4: ~135 min, 0.
-
-### Critical lesson (bug OBS3-P1, March 2026)
-
-> Any optimization that restructures an inner loop on mathematical computation  
-> **must** be verified against known reference values before production use.  
-> Static review — even multi-LLM — is not sufficient.  
-> **Mandatory regression test after every recompilation of `sun_ext_v11.c`:**  
-> expected `FOUND m=11924 n=6119832581`.
 
 ---
 

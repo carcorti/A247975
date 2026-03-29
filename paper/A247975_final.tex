@@ -1,33 +1,27 @@
-%-----------------------------------------------------------------------
-% A247975_rev25.tex — Submission draft (March 2026)
-% For final MCOM production: \documentclass{amsart} → \documentclass{mcom-l}
-%-----------------------------------------------------------------------
+\documentclass[pdflatex,sn-mathphys-num,Numbered]{sn-jnl}
 
-\documentclass{amsart}
-
-\usepackage{amsmath,amssymb}
-\usepackage{hyperref}
+%%% Standard Packages
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{url}
 
-\hypersetup{
-    colorlinks = true,
-    linkcolor  = black,
-    citecolor  = black,
-    urlcolor   = black
-}
-
+%%% Theorem environments (SN predefined styles)
+%%  thmstyleone:   bold head, italic body (numbered) — theorems
+%%  thmstyletwo:   italic head, roman body (numbered) — examples, remarks
+%%  thmstylethree: bold head, roman body (numbered)  — definitions
+\theoremstyle{thmstyleone}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
 \newtheorem{conjecture}[theorem]{Conjecture}
 
-\theoremstyle{remark}
+\theoremstyle{thmstylethree}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{thmstyletwo}
+\newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
 \numberwithin{equation}{section}
@@ -37,39 +31,18 @@
 %=======================================================================
 
 \title[Exceptional Cases of Sequence A247975]
-{Exceptional Cases and Statistical Structure of\\
-Sequence A247975: a Computational Study of\\
+{Exceptional Cases and Statistical Structure of
+Sequence A247975: a Computational Study of
 Sun's Conjecture~4.1(i)}
 
-\author[C. Corti]{Carlo Corti}
-\address{Independent researcher, 21-040~Kalin\'owka, Poland}
-\email{carlo.corti@outlook.com}
+\author*[1]{\fnm{Carlo} \sur{Corti}}\email{carlo.corti@outlook.com}
 
-\thanks{%
-  \textit{AI Disclosure.}
-  The computational implementation, including the C~search program
-  and verification sieve, was developed with extensive assistance
-  from Anthropic's Claude language models
-  (\texttt{claude-sonnet-4-6} and \texttt{claude-opus-4-6}).
-  Claude also assisted substantially in the statistical analysis
-  and in the preparation of this manuscript.
-  All computations were executed and independently verified by the
-  author, who bears full scientific responsibility for all results,
-  including those portions where AI assistance was used.
-  The use of AI tools is disclosed in accordance with AMS publication
-  policy; see
-  \url{https://www.ams.org/publications/journals/policies/UseofArtificialIntelligence}.%
-}
+\affil*[1]{\orgname{Independent researcher},
+  \orgaddress{\postcode{21-040}, \city{Kalin\'owka}, \country{Poland}}}
 
-\subjclass[2020]{Primary 11A41; Secondary 11Y55, 11N05}
+\pacs[MSC Classification]{11A41, 11Y55, 11N05}
 
-\keywords{prime numbers, integer sequences, OEIS, computational number
-theory, Sun's conjecture, Hill estimator, Cram\'er ratio}
-
-\date{}
-
-\begin{abstract}
-We present a computational investigation of sequence A247975 in the
+\abstract{We present a computational investigation of sequence A247975 in the
 OEIS, which encodes Sun's Conjecture~4.1(i): for every positive integer
 $m$, there exists a positive integer~$n$ such that $(m+n)$ divides
 $p_m^2 + p_n^2$, where $p_k$ denotes the $k$-th prime.
@@ -77,40 +50,35 @@ We determine $a(m)$ for $119\,995$ of the values
 $m = 1, 2, \ldots, 120\,000$, with final search bound
 $n \leq 2 \times 10^{11}$;
 the remaining $5$ values are unresolved within this bound.
-The initial computation (search bound $n \leq 2 \times 10^9$)
-resolved $119\,931$ cases with $69$ unresolved; a targeted
-extended search resolved $64$ of those $69$,
-reducing the unresolved count to~$5$.
-Among the $119\,995$ resolved values we identify $606$
-exceptional resolved cases (where $a(m) > 10^8$), and document the
-outstanding Cram\'er-type ratio $a(m)/(m \log m)$
-(all logarithms are natural) at $m = 23\,995$ with
-$a(m) = 47\,572\,503\,750$
-(ratio $\approx 196\,577$, the global maximum among resolved cases),
-and the largest absolute value
+We prove that the modular filter used in the search eliminates an
+asymptotically total proportion of candidates, and establish
+computational lower bounds $a(m) > 2 \times 10^{11}$ for the five
+unresolved cases.
+Among the resolved values we identify $606$
+exceptional cases (where $a(m) > 10^8$), including
+the outstanding Cram\'er-type ratio $a(m)/(m \log m) \approx 196\,577$
+at $m = 23\,995$ and the largest absolute value
 $a(82\,300) = 81\,961\,045\,941$.
-Statistical analysis of the resolved dataset yields a Hill
-statistic
+Statistical analysis yields a Hill statistic
 $\hat{\alpha}_{\mathrm{Hill}} \approx 0.713$, consistent with
-heavy-tailed behaviour.
-The $5$ unresolved values ($m \in \{37\,249,\; 66\,257,\;
-76\,868,\; 98\,379,\; 117\,862\}$)
-each have estimated Cram\'er ratios exceeding $145\,000$ and are
-proposed as explicit open problems.
+heavy-tailed behaviour; a density-based heuristic model
+fails quantitatively, and we identify three structural sources
+of discrepancy.
+The five unresolved values are proposed as computational challenge
+instances.
 Divisibility was independently verified for all $606$ exceptional
-cases via \texttt{SymPy} ($542$ from the initial computation and
-all $64$ from the extended search); minimality was independently
-verified for $319$ cases via an independent C~sieve of Eratosthenes:
-$290$ cases from the initial computation and $29$ selected
-extended-search cases (including the $4$ with the largest
-Cram\'er ratios and all $9$ cases with
-$a(m) \in [10^{10},\, 3 \times 10^{10}]$).
-\end{abstract}
+cases via \texttt{SymPy}; minimality was independently verified
+for $319$ cases via an independent C~sieve.}
+
+\keywords{Prime numbers, Integer sequences, OEIS,
+Computational number theory, Sun's conjecture, Cram\'er ratio}
 
 \maketitle
 
+%=======================================================================
 \section{Introduction}
 \label{sec:intro}
+%=======================================================================
 
 In a paper submitted to arXiv in 2013 and published in 2019,
 Zhi-Wei Sun~\cite{Sun2019} proposed a collection of conjectures on
@@ -150,7 +118,10 @@ $n \leq 2 \times 10^{11}$, all exhibiting elevated modular
 obstruction rates and extreme Cram\'er-ratio lower bounds;
 these are proposed as explicit open problems.
 
+%=======================================================================
 \section{Setup and Notation}
+\label{sec:setup}
+%=======================================================================
 
 We reformulate the divisibility condition in modular arithmetic
 and establish the number-theoretic constraints underlying the
@@ -167,9 +138,12 @@ When $\gcd(p_m, s) = 1$, this simplifies to
 \]
 so (under the assumption $\gcd(p_m, s) = 1$) a solution exists at
 index $n$ if and only if $p_n$ falls in one of
-the $2^{\omega(s)}$ residue classes of the form $r \cdot p_m \pmod{s}$,
+the admissible residue classes of the form $r \cdot p_m \pmod{s}$,
 where $r$ ranges over the square roots of $-1$ modulo~$s$
 and $\omega(s)$ denotes the number of distinct prime factors of~$s$.
+When such square roots exist, their number is $2^{\omega(s)}$ for
+odd~$s$ and $2^{\omega(s)-1}$ for $s \equiv 2 \pmod{4}$
+(see below).
 
 When $\gcd(p_m, s) > 1$, i.e., $p_m \mid s = m+n$, the divisibility
 chain $p_m \mid s$, $p_m \mid p_m^2$, and $(m+n) \mid (p_m^2 + p_n^2)$
@@ -246,7 +220,10 @@ and condition~(b) partially (up to a trial-division bound); see
 Section~\ref{sec:filter} for details.
 Candidates not eliminated by the filter are tested by direct arithmetic.
 
+%=======================================================================
 \section{Computational Methods}
+\label{sec:methods}
+%=======================================================================
 
 \subsection{Algorithm and modular filter}
 \label{sec:filter}
@@ -277,7 +254,8 @@ $(p_n p_m^{-1})^2 \equiv -1 \pmod{s}$); the filter is therefore
 \emph{sound} in the sense that it discards only provably impossible
 candidates.
 Note that for $m \geq 2$ the case $\gcd(p_m, s) > 1$ would force
-$n = m$, which is not a valid solution (as shown in Section~2); the filter may therefore assume
+$n = m$, which is not a valid solution (as shown in
+Section~\ref{sec:setup}); the filter may therefore assume
 $\gcd(p_m, s) = 1$ for all remaining candidates, and its conditions
 correctly characterise impossibility.
 Values of $s$ that have a prime factor $q \equiv 3 \pmod{4}$ larger
@@ -286,19 +264,96 @@ direct divisibility test, which may still fail, resulting in a small
 amount of redundant arithmetic.
 Across the range $m = 1, \ldots, 120\,000$, the filter eliminates
 empirically $73$--$77\%$ of candidate values of $n$ before any
-arithmetic is performed.
-Numerically, approximately $83\%$ of integers near $10^9$ possess at
-least one prime factor $q \equiv 3 \pmod{4}$ to an \emph{odd} power
-(a consequence of the Landau--Ramanujan asymptotic
-formula~\cite{Landau1908} evaluated at finite scale).
-The filter's condition is actually \emph{broader}: it checks for
-divisibility by any prime $q \equiv 3 \pmod{4}$ to \emph{any} power
-(odd or even), which defines a superset of the ``odd power'' set;
-the theoretical elimination rate for the filter's exact condition is
-therefore slightly \emph{higher} than $83\%$.
-The observed rate of $73$--$77\%$ is lower than this theoretical
-expectation solely because the trial-division bound $B = 10^4$
-leaves large prime factors unchecked.
+arithmetic is performed; we call this per-$m$ elimination percentage
+the \emph{obstruction rate}.
+The following proposition makes the asymptotic obstruction rate precise.
+
+\begin{proposition}[Asymptotic obstruction rate]\label{prop:obstruction}
+Let $\mathcal{A}(x)$ denote the set of integers $s \leq x$ satisfying
+both conditions of Proposition~\textup{\ref{prop:qr}}, i.e.,
+$v_2(s) \leq 1$ and $s$ has no prime factor $q \equiv 3 \pmod{4}$.
+Then
+\[
+\frac{|\mathcal{A}(x)|}{x}
+\;\sim\;
+\frac{C_0}{\sqrt{\ln x}}
+\qquad (x \to \infty),
+\]
+where $C_0 > 0$ is an explicit constant.
+In particular, the proportion of candidates eliminated by the exact
+filter \textup{(}conditions \textup{(a)} and \textup{(b)} of
+Proposition~\textup{\ref{prop:qr})} tends to~$1$ as the search
+bound grows.
+\end{proposition}
+
+\begin{proof}
+An integer $s$ satisfies condition~(b) if and only if every prime
+factor of $s$ lies in the set $\mathcal{P} = \{2\} \cup
+\{p \text{ prime} : p \equiv 1 \pmod{4}\}$.
+The classical $B_1$ numbers (integers representable as a sum
+of two squares) are characterised by the condition that every prime
+$q \equiv 3 \pmod{4}$ appears to an \emph{even} exponent in the
+factorisation; our set $\mathcal{A}(x)$ imposes the strictly
+stronger requirement that no such prime divides~$s$ at all,
+so $\mathcal{A}(x)$ is a proper subset of the $B_1$ set.
+By the prime number theorem for arithmetic progressions, the primes
+in $\mathcal{P}$ have natural density $\frac{1}{2}$ among all primes.
+A theorem of Wirsing~\cite{Wirsing1961} on sums of non-negative
+multiplicative functions gives the count of integers up to~$x$ whose
+prime factors all belong to a set of primes with
+density $\delta$ as $\sim C \cdot x/(\ln x)^{1-\delta}$
+for an explicit constant $C > 0$ depending on the set.
+Applying this with $\delta = \frac{1}{2}$ yields
+$|\{s \leq x : \text{condition (b) holds}\}| \sim C_1 \cdot x/\sqrt{\ln x}$;
+the asymptotic order matches the classical Landau--Ramanujan
+result~\cite{Landau1908} for the larger $B_1$ set, but the
+constant $C_1$ is smaller since fewer integers are counted.
+Imposing condition~(a) additionally ($v_2(s) \leq 1$) excludes those
+$s$ divisible by~$4$.
+Among integers whose prime factors lie in $\mathcal{P}$,
+the proportion with $v_2(s) \geq 2$ is asymptotically constant,
+so the combined count retains
+the same order $\sim C_0 \cdot x/\sqrt{\ln x}$ with a reduced
+constant $C_0 \leq C_1$.
+The claimed obstruction rate follows:
+$1 - |\mathcal{A}(x)|/x \to 1$ as $x \to \infty$.
+\end{proof}
+
+% computation from formal proof; defined C_3 explicitly; corrected
+% rounding; resolved variable B overloading.
+\begin{remark}\label{rem:C0value}
+The constant $C_0$ in Proposition~\textup{\ref{prop:obstruction}} can
+be estimated numerically via a Mertens-type product.
+Define
+\[
+C_3 \;=\; \lim_{y \to \infty}\;
+\sqrt{\ln y}\;
+\prod_{\substack{q \leq y \\ q \equiv 3 \pmod{4}}}
+\left(1 - \frac{1}{q}\right),
+\]
+which exists by the analogue of Mertens' third theorem for primes in
+arithmetic progressions
+\textup{(}see \textup{\cite{Tenenbaum1995}}, Ch.~I.3\textup{)}.
+Computing the partial products up to $y = 10^6$ gives
+$C_3 \approx 0.8689$, stable to six decimal places.
+Combining with the factor $\frac{3}{4}$ from condition~\textup{(a)}
+yields $C_0 \approx \frac{3}{4} \times 0.8689 \approx 0.652$.
+\end{remark}
+
+For the \emph{truncated} filter used in our implementation,
+which checks condition~(b) only up to a trial-division bound
+$B = 10^4$, the survival proportion is
+\[
+\frac{3}{4} \prod_{\substack{q \leq B \\ q \equiv 3 \pmod{4}}}
+\left(1 - \frac{1}{q}\right)
+\;\approx\; 0.215,
+\]
+yielding a predicted obstruction rate of $\approx 78.5\%$.
+This is consistent with, though slightly higher than, the
+observed range $73$--$77\%$; the residual gap reflects
+correlations among consecutive values $s = m+n$ arising from
+shared small prime factors and the arithmetic structure of
+the sequence $\{m+1, m+2, \ldots\}$.
 We refer to this per-$m$ elimination percentage as the
 \emph{obstruction rate}; see Section~\ref{sec:notfound}
 and Table~\ref{tab:notfound} for the obstruction rates of the
@@ -354,6 +409,7 @@ up to the sieve limit is either confirmed prime or confirmed composite;
 no probabilistic primality test is employed.
 
 \subsection{Computation phases}
+\label{sec:phases}
 
 The computation proceeded in phases:
 \begin{enumerate}
@@ -442,6 +498,19 @@ unresolved values likely require $n$ well beyond $2 \times 10^{11}$.
 The total wall-clock time for Sessions S1--S4 was approximately
 $356$ minutes ($\approx 6$~hours).
 
+\subsection{Use of AI tools}
+\label{sec:ai-disclosure}
+
+The computational implementation, including the C~search program
+and verification sieve, was developed with extensive assistance
+from Anthropic's Claude language models
+(\texttt{claude-sonnet-4-6} and \texttt{claude-opus-4-6}).
+Claude also assisted substantially in the statistical analysis
+and in the preparation of this manuscript.
+All computations were executed and independently verified by the
+author, who bears full scientific responsibility for all results,
+including those portions where AI assistance was used.
+
 \subsection{Independent verification}
 \label{sec:verification}
 
@@ -483,7 +552,8 @@ exhaustive C~search.
 	with no code shared with the search programs, verified $319$ cases
 	by exhaustive search from $n = 1$, confirming both the divisibility
 	condition \emph{and} the minimality of $a(m)$.
-	The $319$ cases were selected in five groups:
+	The $319$ cases comprise six groups ($318$ cases total)
+	plus one smoke-test reference case:
 	\begin{itemize}
 		\item \emph{Group~B1}: the $100$ smallest exceptional cases,
 		with $a(m)$ ranging from $1.00 \times 10^8$ to
@@ -519,12 +589,17 @@ exhaustive C~search.
 \end{enumerate}
 
 In total, $10\,925$ individual verifications were performed across all
-three methods (counting cases checked by multiple methods separately),
-with zero discrepancies.
+three methods: $10\,000$ cross-consistency checks (Method~1),
+$606$ SymPy divisibility checks (Method~2), and $319$ independent
+sieve minimality checks (Method~3), with zero discrepancies.
 
+%=======================================================================
 \section{Results}
+\label{sec:results}
+%=======================================================================
 
 \subsection{Summary}
+\label{sec:summary}
 
 For $m = 1, \ldots, 120\,000$, we determined $a(m)$ in $119\,995$ cases:
 $119\,931$ in the initial computation (Phase~6, bound
@@ -536,7 +611,8 @@ Section~\ref{sec:notfound}.
 Table~\ref{tab:top10} lists the ten largest values of $a(m)$ found.
 
 We call a resolved $m$ \emph{exceptional} if $a(m) > 10^8$.
-This threshold is approximately $1300$ times the median value of $a(m)$
+This is an author-defined cutoff chosen for exposition;
+it is approximately $1300$ times the median value of $a(m)$
 ($\approx 79\,000$, computed from the $119\,995$ resolved values).
 There are $E_{\mathrm{res}}(1.2 \times 10^5) = 606$ such resolved exceptional
 cases ($542$ from the initial computation plus all $64$ cases resolved
@@ -558,6 +634,8 @@ Section~\ref{sec:data}.
 \begin{table}[ht]
 	\centering
 	\caption{Ten largest values of $a(m)$ for $m \leq 120\,000$.
+		The Cram\'er-type ratio is $C(m) = a(m)/(m \log m)$
+		(natural logarithm throughout).
 		All entries were found in the extended search
 		(Section~\ref{sec:extended}).}
 	\label{tab:top10}
@@ -580,6 +658,7 @@ Section~\ref{sec:data}.
 \end{table}
 
 \subsection{Outstanding cases}
+\label{sec:outstanding}
 
 We list the five largest Cram\'er-type ratios
 $C(m) = a(m)/(m\log m)$ among resolved $m \leq 120\,000$
@@ -631,6 +710,7 @@ $s = m + a(m) = 6\,119\,844\,505$,
 $C \approx 54\,679$; independently verified by both methods.
 
 \subsection{Growth of resolved exceptional cases}
+\label{sec:growth}
 
 Let $E_{\mathrm{res}}(M)$ denote the number of resolved values
 $m \leq M$ with $a(m) > 10^8$.
@@ -664,9 +744,13 @@ successive ranges of $10\,000$.
 	\end{tabular}
 \end{table}
 
+%=======================================================================
 \section{Statistical Analysis}
+\label{sec:statistics}
+%=======================================================================
 
 \subsection{Heavy tail}
+\label{sec:heavytail}
 
 The distribution of $a(m)$ for resolved $m = 1, \ldots, 120\,000$ is
 strongly heavy-tailed.
@@ -715,9 +799,11 @@ only as an indication of heavy-tailed behaviour, not as evidence of a
 specific parametric form.
 
 \subsection{Cram\'er-type ratio}
+\label{sec:cramerratio}
 
 The Cram\'er-type ratio $C(m) = a(m)/(m \log m)$, as defined in
-Section~4.2, has median over resolved $m = 2, \ldots, 120\,000$
+Section~\ref{sec:outstanding}, has median over resolved
+$m = 2, \ldots, 120\,000$
 (computed from the $119\,995$ resolved values)
 \[
 \widetilde{C} \approx 0.154,
@@ -725,10 +811,13 @@ Section~4.2, has median over resolved $m = 2, \ldots, 120\,000$
 stable and well-defined across the full range; the $64$ newly resolved
 values lie far in the upper tail and do not affect the median.
 
+%=======================================================================
 \section{Heuristic Model and Comparison with Data}
 \label{sec:heuristic}
+%=======================================================================
 
 \subsection{Density argument}
+\label{sec:density}
 
 We present below a density-based heuristic for the expected scale
 of $a(m)$; as the data will show, the model fails quantitatively
@@ -751,8 +840,11 @@ see \cite{Davenport}, Ch.~21), and the following heuristic should be
 treated as qualitative.
 The total proportion of admissible residue classes modulo $s$ is
 \[
-D(s) \;=\; \frac{2^{\omega(s)}}{\varphi(s)}.
+D(s) \;=\; \frac{2^{\omega(s)}}{\varphi(s)}
 \]
+for odd~$s$; for $s \equiv 2 \pmod{4}$ the numerator is
+$2^{\omega(s)-1}$, a distinction absorbed into the leading constant
+in the estimates below.
 Note that $D(s)$ is the \emph{proportion of admissible residue classes},
 not a probability of success for a randomly chosen prime near $s$;
 the following derivation should be regarded as a rough heuristic
@@ -793,11 +885,17 @@ for $m = 10^5$ this yields
 $\approx 0.04\,m$ --- well below the observed median
 $a(m) \approx 1.3\,m$.
 This large discrepancy shows that the density model does not explain
-the observed scale of $a(m)$; the Cram\'er-type normalization
+the observed scale of $a(m)$.
+This prediction is purely illustrative and should not be interpreted
+as a rigorous asymptotic estimate; the underlying derivation combines
+a normal-order result with an extremal bound in a mathematically
+unjustified way, as noted above.
+The Cram\'er-type normalization
 $m\log m$ is motivated independently by the prime-index analogy
-(Section~5.2), not derived from $D(s)$.
+(Section~\ref{sec:cramerratio}), not derived from $D(s)$.
 
 \subsection{Comparison with data}
+\label{sec:comparison}
 
 The density model provides a qualitative explanation for the heavy tail
 (the factor $(\log s)^{\log 2}$ in $D(s)$ produces slower-than-power-law
@@ -814,18 +912,75 @@ We therefore regard the density model as providing only a qualitative
 motivation for heavy-tailed behaviour, and do not propose a
 quantitative formula for $E_{\mathrm{res}}(M)$.
 
+\subsection{Sources of discrepancy}
+\label{sec:discrepancy}
+
+The density model of Section~\ref{sec:density} underestimates the
+typical value of $a(m)$ by a factor of approximately $30$
+(predicting $\sim 0.04\,m$ versus observed $\sim 1.3\,m$).
+We identify three structural sources of this discrepancy, none of
+which is captured by the independence assumptions underlying the
+model.
+
+\paragraph{Correlated candidates.}
+The model treats each candidate $n$ as an independent trial.
+In reality, the moduli $s = m + n$ and $s' = m + n + 1$ are
+consecutive integers, and their divisibility by small primes is
+strongly correlated: if $q \mid s$ then $q \nmid s'$.
+Over a window of $q$ consecutive values of $s$, exactly one is
+divisible by~$q$; this short-range anticorrelation means that the
+``success events'' (finding a prime in an admissible residue class)
+are not independent, and the waiting-time distribution differs from
+the geometric distribution assumed by the model.
+
+\paragraph{Varying modulus.}
+For each candidate $n$, the modulus $s = m + n$ changes, so the set
+of admissible residue classes changes with~$n$.
+The density model averages over $s$ as though the residue class
+condition were fixed, but in practice the target moves with every
+step.
+In particular, $D(s)$ fluctuates between zero (when $s$ has a prime
+factor $q \equiv 3 \pmod{4}$) and $\gg 1/s$ (when $s$ is a product
+of small primes $\equiv 1 \pmod{4}$); this intermittency produces
+longer runs of consecutive failures than the averaged model predicts.
+
+\paragraph{Interaction with $p_m$.}
+The density $D(s)$ accounts for the proportion of admissible residue
+classes modulo~$s$, but the actual condition also requires $p_n$ to
+be a prime landing in one of these classes.
+The distribution of primes in residue classes modulo~$s$ is governed
+by Dirichlet's theorem, which gives equidistribution only
+asymptotically; for the finite ranges involved
+($p_n \leq 4.7 \times 10^{10}$ at bound $n = 2 \times 10^9$,
+while $s$ can be as large as $\sim 2 \times 10^9$), there can be
+significant deviations from equidistribution, particularly for
+moduli $s$ with special arithmetic properties relative to $p_m$.
+
+These three effects compound to produce a systematic underestimate
+of the waiting time.
+Collectively, they plausibly explain much of the observed factor of
+approximately~$30$ between the heuristic prediction
+($\sim 0.04\,m$) and the data ($\sim 1.3\,m$).
+A refined model incorporating even the first correction (correlated
+candidates via an inclusion-exclusion over small primes) would
+likely close much of the gap; see also \cite{Granville1995} for a
+discussion of corrections to the classical Cram\'er heuristic
+in related contexts.
+We leave the development of such a model as a direction for
+future work.
+
 The outstanding Cram\'er-type ratio of $m = 23\,995$
 (ratio $\approx 196\,577$, the global resolved maximum over
-$m \leq 120\,000$) points toward richer arithmetic structure.
-The previous record holder $m = 4703$ (ratio $\approx 19\,111$)
-was surpassed by a factor of more than~$10$; specific properties of
-$p_{23\,995} = 274\,453$ and its
-interaction with the moduli $s = m+n$ could produce a suppression
-of $D(s)$ not captured by the average model; this remains speculative.
-A refined heuristic remains an open problem.
+$m \leq 120\,000$) may reflect an especially unfavourable interaction
+between $p_{23\,995} = 274\,453$ and the moduli $s = m+n$, producing
+a suppression of $D(s)$ not captured by the average model.
+Identifying the specific arithmetic mechanism responsible for such
+extreme outliers remains an open question.
 
+%=======================================================================
 \section{Unresolved Cases}
 \label{sec:notfound}
+%=======================================================================
 
 The $69$ values of $m \leq 120\,000$ that were unresolved in the
 initial computation ($n \leq 2 \times 10^9$) were subjected to the
@@ -877,30 +1032,70 @@ $51$ cases in the first range $n \in [2 \times 10^9, 10^{10}]$,
 $9$ more in $[10^{10}, 3 \times 10^{10}]$,
 $2$ in $[5 \times 10^{10}, 10^{11}]$,
 and $0$ in the final range $[10^{11}, 2 \times 10^{11}]$.
-Two consecutive sessions (S3 and S4) resolved no cases,
-strongly suggesting that the remaining $5$ values likely require
-$n$ well beyond $2 \times 10^{11}$.
+Two consecutive sessions (S3 and S4) resolved no cases.
 
-\paragraph{Open problem.}
-We propose the $5$ unresolved values as an explicit open problem:
-for each $m \in \{37\,249,\; 66\,257,\; 76\,868,\; 98\,379,\;
-117\,862\}$, find the least positive integer $n$ such that
-$(m+n) \mid p_m^2 + p_n^2$, or prove that none exists.
-The estimated Cram\'er lower bounds (Table~\ref{tab:notfound}) suggest
-that any solution satisfies $n > 2 \times 10^{11}$, and likely
-$n \gg 10^{12}$ for $m = 37\,249$.
+\paragraph{Computational lower bounds.}
+The exhaustive search establishes the following.
 
-We cannot rule out that some of these $5$ cases represent genuine
-counterexamples to Conjecture~\ref{conj:sun}, though this seems
-unlikely: the extended search resolved cases with Cram\'er ratios up to
-$C(23\,995) \approx 196\,577$ at $n \approx 4.8 \times 10^{10}$, and the
-pattern of progressive resolution suggests that the $5$ remaining
-cases are extreme outliers of the same distribution rather than
-structural counterexamples.
-The arithmetic characterization of the high-obstruction set remains an
-open problem.
+\begin{theorem}[Computational lower bounds]\label{thm:lower}
+For each $m \in \{37\,249,\; 66\,257,\; 76\,868,\; 98\,379,\;
+117\,862\}$, the divisibility condition
+$(m+n) \mid p_m^2 + p_n^2$ has no solution with
+$1 \leq n \leq 2 \times 10^{11}$.
+Consequently, either $a(m) > 2 \times 10^{11}$ or
+Conjecture~\textup{\ref{conj:sun}} fails for this value of $m$.
+\end{theorem}
 
+\begin{proof}
+The search program \texttt{sun\_ext\_v11.c} tests, for each of the
+five values of $m$, every integer $n$ in the range
+$1 \leq n \leq 2 \times 10^{11}$: it enumerates primes $p_n$ via a
+segmented sieve of Eratosthenes and, for each $n$ not eliminated by
+the modular filter of Section~\ref{sec:filter}, evaluates the
+divisibility condition $(p_m^2 + p_n^2) \bmod (m+n) = 0$ directly
+using $128$-bit arithmetic (Section~\ref{sec:extended}).
+The modular filter is \emph{sound}
+(Proposition~\ref{prop:qr}): it eliminates only values of $n$ for
+which no solution can exist, so no valid candidate is skipped.
+For all five values of $m$, the search returns no solution in the
+stated range; the sieve is deterministic and complete, so the
+conclusion follows.
+The source code is publicly available~\cite{GithubRepo}.
+\end{proof}
+
+\begin{remark}
+The result of Theorem~\textup{\ref{thm:lower}} is conditional on the
+correctness of the deterministic search implementation.
+The implementation has been independently spot-checked for $319$
+values via Method~3 of Section~\textup{\ref{sec:verification}},
+with zero discrepancies; this includes the $4$ resolved cases with
+the largest Cram\'er ratios.
+\end{remark}
+
+In particular, the Cram\'er-type ratio for each of these values
+satisfies $C(m) = a(m)/(m \log m) > 2 \times 10^{11}/(m \log m)$,
+yielding the lower bounds in Table~\ref{tab:notfound}.
+
+\paragraph{Computational challenge.}
+We propose the five values of Theorem~\ref{thm:lower} as
+computational challenge instances: for each, determine $a(m)$ or
+establish that no solution exists.
+The decreasing resolution rate (Table~\ref{tab:extended}) and the
+absence of any resolution in the range
+$n \in [10^{11}, 2 \times 10^{11}]$ indicate that resolving these
+cases will require searching substantially beyond
+$n = 2 \times 10^{11}$.
+Whether any of these values constitutes a genuine counterexample to
+Conjecture~\ref{conj:sun} remains an open question; the pattern of
+progressive resolution observed in this study (from $69$ unresolved
+at bound $2 \times 10^9$ to $5$ at bound $2 \times 10^{11}$) is
+consistent with these being extreme outliers of the tail distribution
+rather than structural failures of the conjecture.
+
+%=======================================================================
 \section{Conclusion}
+\label{sec:conclusion}
+%=======================================================================
 
 We have determined $a(m)$ for $119\,995$ values of $m \leq 120\,000$,
 with $5$ values remaining unresolved within our final search bound
@@ -915,165 +1110,236 @@ $m = 23\,995$ whose Cram\'er-type ratio ($\approx 196\,577$) is
 the global resolved maximum over the entire range studied, more than
 ten times the previous record holder $m = 4703$ ($\approx 19\,111$).
 
-The $5$ unresolved cases ($m \in \{37\,249,\; 66\,257,\; 76\,868,\;
-98\,379,\; 117\,862\}$) each exhibit Cram\'er ratio lower bounds
-exceeding $145\,000$ and are proposed as explicit open problems.
+We proved that the modular filter eliminates an asymptotically
+increasing proportion of candidates
+(Proposition~\ref{prop:obstruction}), with the theoretical rate
+for the truncated filter ($\approx 78.5\%$) consistent with the
+observed range ($73$--$77\%$).
+We identified three structural sources for the quantitative failure
+of the density-based heuristic (Section~\ref{sec:discrepancy}):
+correlated candidates, varying moduli, and finite-range deviations
+from equidistribution in arithmetic progressions.
+
+For the $5$ unresolved cases, we established computational lower bounds
+$a(m) > 2 \times 10^{11}$ (Theorem~\ref{thm:lower}) and proposed
+them as computational challenge instances.
 The progressive resolution of the original $69$ unresolved cases
 --- from $69$ at bound $2 \times 10^9$ to $5$ at bound
-$2 \times 10^{11}$ --- demonstrates that the conjecture holds for
-all but the most arithmetically resistant values of $m$ in this range,
-and strongly suggests that these $5$ cases are extreme outliers of the
-same distribution rather than structural counterexamples.
+$2 \times 10^{11}$ --- demonstrates that the conjecture was verified
+computationally for all but the most arithmetically resistant values
+of $m$ in this range.
 
 The heuristic density model provides a qualitative explanation for the
 heavy tail but fails quantitatively to predict the scale of $a(m)$ or
 the growth rate of exceptional cases.
-Natural directions for future work include an extended computational
-search for the $5$ remaining unresolved values, a refined probabilistic
-model for the distribution of $a(m)$
-(see also \cite{Granville1995} for a discussion of corrections to
-the classical Cram\'er heuristic), and analogous computational studies
-of related sequences such as A248044 (Sun's Conjecture~4.3(i),
-involving $\pi(m)^2 + \pi(n)^2$).
 
-\section*{Data Availability}
-\label{sec:data}
+\paragraph{Comparison with Conjecture~4.3(i).}
+A companion computation~\cite{CortiA248044} applies the same
+methodology to sequence A248044~\cite{OEIS_A248044}, which encodes
+Sun's Conjecture~4.3(i): $(m+n) \mid \pi(m)^2 + \pi(n)^2$.
+Computing $a(m)$ for $m \leq 100\,000$ with bound $n \leq 10^{13}$
+resolves $99\,998$ of $100\,000$ cases, leaving only $2$ unresolved.
+The comparison reveals instructive structural differences:
+the obstruction rate is lower (${\sim}\,57\%$ vs.\ $73$--$77\%$
+here), the maximum resolved Cram\'er-type ratio is much larger
+(${\sim}\,6.5 \times 10^7$ vs.\ ${\sim}\,1.97 \times 10^5$),
+and the two unresolved cases form an arithmetically structured
+cluster sharing $\pi(m) = 2225 = 5^2 \times 89$, whose
+factorisation into primes $\equiv 1 \pmod{4}$ produces maximal
+modular obstruction --- a phenomenon absent in the present sequence,
+where $p_m$ is always prime and the obstruction structure is more
+uniform.
+These contrasts indicate that the difficulty of Sun's divisibility
+conjectures depends critically on the arithmetic function involved
+($p_k$ vs.\ $\pi(k)$), not only on the shared divisibility
+framework $(m+n) \mid f(m)^2 + f(n)^2$.
 
-The complete dataset ($119\,995$ resolved values and $5$ unresolved
-$m$-values) is publicly available at the repositories listed below.
-The C~source code for the main search (\texttt{sun\_v6.c}),
-the extended-search program (\texttt{sun\_ext\_v11.c}),
-the independent verification sieves
-(\texttt{verify\_min.c} and \texttt{verify\_min\_ext.c}),
-the Python/SymPy verification scripts
-(\texttt{verify\_ext\_sympy.py}, \texttt{run\_verify\_ext\_batch.py}),
-the complete CSV datasets
-(\texttt{phase1\_results.csv}, \texttt{ext1\_results.csv},
-\texttt{ext2\_results.csv}),
-and the full machine-readable verification logs are available at:
-\begin{itemize}
-  \item GitHub repository:
-        \url{https://github.com/carcorti/A247975}
-  \item Permanent Zenodo archive (DOI):\\
-        \url{https://doi.org/10.5281/zenodo.18920371}
-\end{itemize}
-The repository will be synchronized with the submitted version of the
-manuscript and all associated data files prior to publication.
+\paragraph{Future work.}
+Natural directions include an extended computational
+search for the $5$ remaining unresolved values of A247975
+(and the $2$ of A248044), a refined probabilistic
+model incorporating the correlation structure identified in
+Section~\ref{sec:discrepancy},
+and a systematic comparative study across the full family of
+Sun's divisibility conjectures~\cite{Sun2019}.
 
-\section*{Acknowledgements}
+%=======================================================================
+\backmatter
+%=======================================================================
+
+\bmhead{Acknowledgements}
 
 The author thanks Zhi-Wei Sun for the beautiful conjecture that
 motivated this work, and Chai Wah Wu, whose extension of the OEIS
 b-file for A247975 to $m \leq 10\,000$ provided a valuable
 cross-check for our results.
 
-\bibliographystyle{amsplain}
+\section*{Declarations}
+
+\begin{description}
+\item[Funding] No funding was received for conducting this study.
+
+\item[Competing interests] The author has no relevant financial
+  or non-financial interests to disclose.
+
+\item[Data availability] \label{sec:data}
+  The complete dataset ($119\,995$ resolved values and $5$ unresolved
+  $m$-values) is publicly available at:
+  \begin{itemize}
+    \item GitHub repository:
+          \url{https://github.com/carcorti/A247975}
+    \item Permanent Zenodo archive (DOI):\\
+          \url{https://doi.org/10.5281/zenodo.18920371}
+    \item OEIS: \url{https://oeis.org/A247975}
+  \end{itemize}
+  The repository will be synchronized with the submitted version of the
+  manuscript and all associated data files prior to publication.
+
+\item[Code availability]
+  The C~source code for the main search
+  (\texttt{sun\_v6.c}), the extended-search program
+  (\texttt{sun\_ext\_v11.c}), the independent verification sieves
+  (\texttt{verify\_min.c} and \texttt{verify\_min\_ext.c}), and the
+  Python/SymPy verification scripts
+  (\texttt{verify\_ext\_sympy.py}, \texttt{run\_verify\_ext\_batch.py})
+  are available at the GitHub and Zenodo repositories listed above.
+
+\item[Author contribution] Not applicable (single author).
+\end{description}
+
 \begin{thebibliography}{99}
 
 	\bibitem{Sun2019}
-	Zhi-Wei Sun,
-	\textit{Some new problems in additive combinatorics},
-	Nanjing Univ.\ J.\ Math.\ Biquarterly \textbf{36} (2019), no.~2,
-	134--155; preprint: arXiv:1309.1679 [math.NT] (submitted 2013,
-	v9: 2020).
+	Sun, Z.-W.:
+	Some new problems in additive combinatorics.
+	Nanjing Univ.\ J.\ Math.\ Biquarterly \textbf{36}(2), 134--155
+	(2019).
+	Preprint: arXiv:1309.1679 [math.NT] (submitted 2013, v9: 2020).
 	Conjecture~4.1(i) appears on p.~15; Remark~4.1 notes the case
-	$m = 4703$. The conjecture was submitted to the OEIS in
-	September~2014.
+	$m = 4703$.
 	\url{https://arxiv.org/abs/1309.1679}
 
 	\bibitem{OEIS_A247975}
-	OEIS Foundation,
-	\textit{Sequence A247975},
+	OEIS Foundation:
+	Sequence A247975.
 	The On-Line Encyclopedia of Integer Sequences
 	(accessed March~2026).
 	\url{https://oeis.org/A247975}
 
 	\bibitem{OEIS_A248354}
-	OEIS Foundation,
-	\textit{Sequence A248354},
+	OEIS Foundation:
+	Sequence A248354.
 	The On-Line Encyclopedia of Integer Sequences
 	(accessed March~2026).
 	\url{https://oeis.org/A248354}
 
 	\bibitem{Hill1975}
-	B.~M.~Hill,
-	\textit{A simple general approach to inference about the tail of a
-		distribution},
-	Ann.\ Statist.\ \textbf{3} (1975), 1163--1174.
+	Hill, B.M.:
+	A simple general approach to inference about the tail of a
+	distribution.
+	Ann.\ Statist.\ \textbf{3}, 1163--1174 (1975)
 
 	\bibitem{IrelandRosen}
-	K.~Ireland and M.~Rosen,
-	\textit{A Classical Introduction to Modern Number Theory},
-	2nd~ed., Springer, New York, 1990.
-	Ch.~5, Theorem~9 for quadratic residues modulo composite integers.
+	Ireland, K., Rosen, M.:
+	A Classical Introduction to Modern Number Theory,
+	2nd edn. Springer, New York (1990).
+	Ch.~5, Theorem~9 for quadratic residues modulo composite integers
 
 	\bibitem{Davenport}
-	H.~Davenport,
-	\textit{Multiplicative Number Theory},
-	3rd~ed., Springer, New York, 2000.
+	Davenport, H.:
+	Multiplicative Number Theory,
+	3rd edn. Springer, New York (2000).
 	Ch.~4 for Dirichlet's theorem; Ch.~21 for the Siegel--Walfisz
-	theorem and uniformity in arithmetic progressions.
+	theorem and uniformity in arithmetic progressions
 
 	\bibitem{SymPy}
-	A.~Meurer et al.,
-	\textit{SymPy: symbolic computing in Python},
-	PeerJ Computer Science \textbf{3} (2017), e103.
-	Version~1.12 used for independent prime computation.
+	Meurer, A., et al.:
+	SymPy: symbolic computing in Python.
+	PeerJ Computer Science \textbf{3}, e103 (2017).
+	Version~1.12 used for independent prime computation
 
 	\bibitem{HardyRamanujan}
-	G.~H.~Hardy and S.~Ramanujan,
-	\textit{The normal number of prime factors of a number~$n$},
-	Quart.\ J.\ Math.\ \textbf{48} (1917), 76--92.
+	Hardy, G.H., Ramanujan, S.:
+	The normal number of prime factors of a number~$n$.
+	Quart.\ J.\ Math.\ \textbf{48}, 76--92 (1917)
 
 	\bibitem{Mertens}
-	F.~Mertens,
-	\textit{Ein Beitrag zur analytischen Zahlentheorie},
-	J.\ Reine Angew.\ Math.\ \textbf{78} (1874), 46--62.
-	See also \cite{Tenenbaum1995}, Ch.~I.3.
+	Mertens, F.:
+	Ein Beitrag zur analytischen Zahlentheorie.
+	J.\ Reine Angew.\ Math.\ \textbf{78}, 46--62 (1874).
+	See also \cite{Tenenbaum1995}, Ch.~I.3
 
 	\bibitem{Tenenbaum1995}
-	G.~Tenenbaum,
-	\textit{Introduction to Analytic and Probabilistic Number Theory},
-	Cambridge Univ.\ Press, 1995.
+	Tenenbaum, G.:
+	Introduction to Analytic and Probabilistic Number Theory.
+	Cambridge Univ.\ Press (1995)
 
 	\bibitem{Cramer1936}
-	H.~Cram\'er,
-	\textit{On the order of magnitude of the difference between consecutive
-		prime numbers},
-	Acta Arith.\ \textbf{2} (1936), 23--46.
+	Cram\'er, H.:
+	On the order of magnitude of the difference between consecutive
+	prime numbers.
+	Acta Arith.\ \textbf{2}, 23--46 (1936)
 
 	\bibitem{WuOEIS}
-	Chai Wah Wu,
-	\textit{Table of $n$, $a(n)$ for $n = 1..10\,000$},
+	Wu, C.W.:
+	Table of $n$, $a(n)$ for $n = 1..10\,000$,
 	contribution to OEIS sequence A247975, 2014.
 	\url{https://oeis.org/A247975/b247975.txt}
 
 	\bibitem{Clauset2009}
-	A.~Clauset, C.~R.~Shalizi, and M.~E.~J.~Newman,
-	\textit{Power-law distributions in empirical data},
-	SIAM Review \textbf{51} (2009), 661--703.
+	Clauset, A., Shalizi, C.R., Newman, M.E.J.:
+	Power-law distributions in empirical data.
+	SIAM Review \textbf{51}, 661--703 (2009)
 
 	\bibitem{CrandallPomerance}
-	R.~Crandall and C.~Pomerance,
-	\textit{Prime Numbers: A Computational Perspective},
-	2nd~ed., Springer, New York, 2005.
-	Ch.~3 for sieve algorithms.
+	Crandall, R., Pomerance, C.:
+	Prime Numbers: A Computational Perspective,
+	2nd edn. Springer, New York (2005).
+	Ch.~3 for sieve algorithms
 
 	\bibitem{Landau1908}
-	E.~Landau,
-	\textit{\"Uber die Einteilung der positiven ganzen Zahlen in vier
-		Klassen nach der Mindestzahl der zu ihrer additiven Zusammensetzung
-		erforderlichen Quadrate},
-	Arch.\ Math.\ Phys.\ \textbf{13} (1908), 305--312.
+	Landau, E.:
+	\"Uber die Einteilung der positiven ganzen Zahlen in vier
+	Klassen nach der Mindestzahl der zu ihrer additiven Zusammensetzung
+	erforderlichen Quadrate.
+	Arch.\ Math.\ Phys.\ \textbf{13}, 305--312 (1908).
 	Establishes the asymptotic count ${\sim}\,Kx/\sqrt{\ln x}$
 	(with $K \approx 0.7642$) of integers up to $x$ with no prime factor
 	$q \equiv 3 \pmod{4}$ to odd power; the natural density of this
-	set is zero.
+	set is zero
 
 	\bibitem{Granville1995}
-	A.~Granville,
-	\textit{Harald Cram\'er and the distribution of prime numbers},
-	Scand.\ Actuarial J.\ (1995), no.~1, 12--28.
+	Granville, A.:
+	Harald Cram\'er and the distribution of prime numbers.
+	Scand.\ Actuarial J.\ \textbf{1995}(1), 12--28 (1995)
+
+	\bibitem{Wirsing1961}
+	Wirsing, E.:
+	Das asymptotische Verhalten von Summen \"uber multiplikative
+	Funktionen.
+	Math.\ Ann.\ \textbf{143}, 75--102 (1961)
+
+	\bibitem{OEIS_A248044}
+	OEIS Foundation:
+	Sequence A248044.
+	The On-Line Encyclopedia of Integer Sequences
+	(accessed March~2026).
+	\url{https://oeis.org/A248044}
+
+	\bibitem{CortiA248044}
+	Corti, C.:
+	Computational verification of Sun's Conjecture~4.3(i)
+	and exceptional structure of sequence~A248044.
+	Preprint, in preparation (2026); data and code:
+	\url{https://github.com/carcorti/A248044},
+	\url{https://doi.org/10.5281/zenodo.19182594}
+
+	\bibitem{GithubRepo}
+	Corti, C.:
+	A247975: computational study of Sun's Conjecture 4.1(i).
+	GitHub repository and Zenodo archive (2026).
+	\url{https://github.com/carcorti/A247975}.
+	\url{https://doi.org/10.5281/zenodo.18920371}
 
 \end{thebibliography}
 
